@@ -74,7 +74,7 @@ print("Create token clicked")
 wait_for_element(driver, "//div[@class='flex gap-2 max-sm:flex-col']/input")
 el = driver.find_element(By.XPATH, "//div[@class='flex gap-2 max-sm:flex-col']/input")
 hf_token = el.get_attribute("value")
-data = {"email" : email, "username" : username, "hf_token" : hf_token}
+data = {"email" : email, "username" : username, "hf_token" : hf_token, 'time' : str(int(time.time()))}
 df = pd.DataFrame([data])
 df.to_sql(name='hfaccounts', con=postgres_engine, if_exists='append', index=False)
 driver.quit()
