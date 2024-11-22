@@ -7,6 +7,10 @@ from pyvirtualdisplay import Display
 from sqlalchemy import create_engine
 from sqlalchemy.pool import NullPool
 import pandas as pd
+from huggingface_hub import HfApi
+from sqlalchemy import create_engine, text
+from sqlalchemy.pool import NullPool
+
 # Start a virtual display
 display = Display(visible=0, size=(1920, 1080))
 display.start()
@@ -79,3 +83,47 @@ df = pd.DataFrame([data])
 df.to_sql(name='hfaccounts', con=postgres_engine, if_exists='append', index=False)
 driver.quit()
 print(data)
+
+files = ["copy_tor.py",
+         "Dockerfile",
+         "requirements.txt",
+         "set_completion_script.py",
+         "start.sh",
+         "write_config.py"]
+
+#for idx, row in df.iterrows():
+def create_repos(token, username, n_repos=3):
+    # API instance
+    api = HfApi(token=token)
+    repo_id = username+"/{}"
+    repo_type = "space"
+    lst = []
+    for i in range(n_repos):
+        repo_id_n = repo_id.format(f"{int(time.time())}")
+        try:
+            api.create_repo(repo_id=repo_id_n, repo_type='space', space_sdk='docker',
+                            space_secrets=[{"key" : "token", "value" : os.getenv("GHP_TOKEN")},],
+                            space_variables=[{"key" : "package", "value" : "qbittorrent-nox"},])
+            for file in files:
+                #retry 3 times
+                for i in range(3):
+                    try:
+                        api.upload_file(path_or_fileobj=file, path_in_repo=file.split("/")[-1], repo_id=repo_id_n, repo_type=repo_type,)
+                        break
+                    except:
+                        pass
+                else:
+                    api.delete_repo(repo_id=repo_id_n,repo_type='space',missing_ok=True)
+                    raise Exception(f"Could not upload file in {repo_id_n}")
+        except Exception as e:
+            print(f"Caught Exception at loop : {i}", e)
+            break
+        data = {}
+        data["username"] = username
+        data['repo_id'] = repo_id_n
+        data['repo_type'] = repo_type
+        lst.append(data)
+    return lst
+
+lst = create_repos(hf_token, username)
+pd.DataFrame(lst).to_sql('hfrepos', postgres_engine, if_exists='append', index=False)
