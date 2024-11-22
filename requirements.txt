@@ -5,4 +5,4 @@ pyvirtualdisplay
 sqlalchemy
 psycopg2-binary
 pandas
-huggingface_hub
+huggingface-hub
