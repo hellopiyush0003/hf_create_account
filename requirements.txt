@@ -1,8 +1,8 @@
-selenium
-GmailBox
-pytz
-pyvirtualdisplay
-sqlalchemy
+requests
+qbittorrent-api
+SQLAlchemy
 psycopg2-binary
 pandas
-huggingface-hub
+cinemagoer
+parse-torrent-name
+huggingface_hub
