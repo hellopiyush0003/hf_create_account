@@ -127,5 +127,13 @@ def create_repos(token, username, n_repos=3):
 
 lst = create_repos(hf_token, username)
 time.sleep(60)
+while True:    
+    status_code_200 = []
+    for x in lst:
+        url = f"https://{x['repo_id'].replace("/", "-")}.hf.space"
+        status_code_200.append(requests.get(url).status_code == 200)
+    if all(status_code_200):
+        print("All Repo_running....")
+        break
 pd.DataFrame(lst).to_sql('hfrepos', postgres_engine, if_exists='append', index=False)
 df.to_sql(name='hfaccounts', con=postgres_engine, if_exists='append', index=False)
