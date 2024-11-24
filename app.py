@@ -10,7 +10,7 @@ import pandas as pd
 from huggingface_hub import HfApi
 from sqlalchemy import create_engine, text
 from sqlalchemy.pool import NullPool
-print(os.getenv('MY_SECRET1'))
+
 # Start a virtual display
 display = Display(visible=0, size=(1920, 1080))
 display.start()
@@ -102,7 +102,7 @@ def create_repos(token, username, n_repos=3):
         repo_id_n = repo_id.format(f"{int(time.time())}")
         try:
             api.create_repo(repo_id=repo_id_n, repo_type='space', space_sdk='docker',
-                            space_secrets=[{"key" : "token", "value" : "ghp_"+os.getenv("GTOKEN")},],
+                            space_secrets=[{"key" : "token", "value" : os.getenv("GHP_TOKEN")},],
                             space_variables=[{"key" : "package", "value" : "qbittorrent-nox"},])
             for file in files:
                 #retry 3 times
