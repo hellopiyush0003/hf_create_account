@@ -80,7 +80,7 @@ el = driver.find_element(By.XPATH, "//div[@class='flex gap-2 max-sm:flex-col']/i
 hf_token = el.get_attribute("value")
 data = {"email" : email, "username" : username, "hf_token" : hf_token, 'time' : str(int(time.time()))}
 df = pd.DataFrame([data])
-df.to_sql(name='hfaccounts', con=postgres_engine, if_exists='append', index=False)
+
 driver.quit()
 print(data)
 
@@ -126,4 +126,6 @@ def create_repos(token, username, n_repos=3):
     return lst
 
 lst = create_repos(hf_token, username)
+time.sleep(60)
 pd.DataFrame(lst).to_sql('hfrepos', postgres_engine, if_exists='append', index=False)
+df.to_sql(name='hfaccounts', con=postgres_engine, if_exists='append', index=False)
