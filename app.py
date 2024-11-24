@@ -10,7 +10,7 @@ import pandas as pd
 from huggingface_hub import HfApi
 from sqlalchemy import create_engine, text
 from sqlalchemy.pool import NullPool
-print(os.getenv("GTOKEN"))
+print(os.getenv('GT'))
 # Start a virtual display
 display = Display(visible=0, size=(1920, 1080))
 display.start()
