@@ -87,7 +87,7 @@ print(data)
 files = ["Dockerfile",]
 
 #for idx, row in df.iterrows():
-def create_repos(token, username, n_repos=3):
+def create_repos(token, username, n_repos=1):
     # API instance
     api = HfApi(token=token)
     repo_id = username+"/{}"
