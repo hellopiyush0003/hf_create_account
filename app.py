@@ -84,12 +84,7 @@ df = pd.DataFrame([data])
 driver.quit()
 print(data)
 
-files = ["copy_tor.py",
-         "Dockerfile",
-         "requirements.txt",
-         "set_completion_script.py",
-         "start.sh",
-         "write_config.py"]
+files = ["Dockerfile",]
 
 #for idx, row in df.iterrows():
 def create_repos(token, username, n_repos=3):
