@@ -54,7 +54,7 @@ wait_for_element(driver, "//button[@type='submit']")
 driver.find_element(By.XPATH, "//button[@type='submit']").click()
 driver.find_element(By.XPATH, "//button[text()='Skip']").click()
 print("Waiting for email", email, username)
-
+conf_url = None
 for i in range(60):
     inbox = Gmail.inbox(email)
     if inbox:
@@ -62,6 +62,8 @@ for i in range(60):
             if 'huggingface' in x.message:
                 conf_url = x.message.split("\n")[1].split("\n")[0]
                 break
+        if conf_url:
+            break
     else:
         time.sleep(1)
 else:
