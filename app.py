@@ -58,7 +58,7 @@ print("Waiting for email", email, username)
 for i in range(60):
     inbox = Gmail.inbox(email)
     if inbox:
-        for x in inbox:
+        for x in inbox[:5]:
             if 'huggingface' in x.message:
                 conf_url = x.message.split("\n")[1].split("\n")[0]
                 break
