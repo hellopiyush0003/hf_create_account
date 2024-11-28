@@ -58,7 +58,7 @@ driver.find_element(By.XPATH, "//button[text()='Skip']").click()
 print("Waiting for email", email, username)
 
 conf_url = None
-for i in range(300):
+while True:
     inbox=tm.get_mails()
     if inbox:
         for x in inbox[:5]:
