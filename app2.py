@@ -22,7 +22,7 @@ email = tm.email
 
 username = f"{email.split("@")[0].replace(".","")}{int(time.time())}"
 
-def wait_for_element(driver, xpath, waitS = 500):
+def wait_for_element(driver, xpath, waitS = 100):
     for i in range(waitS):
         if len(driver.find_elements(By.XPATH, xpath)) > 0:
             break
@@ -58,7 +58,7 @@ driver.find_element(By.XPATH, "//button[text()='Skip']").click()
 print("Waiting for email", email, username)
 
 conf_url = None
-for i in range(60):
+for i in range(300):
     inbox=tm.get_mails()
     if inbox:
         for x in inbox[:5]:
