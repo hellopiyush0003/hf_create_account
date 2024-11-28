@@ -22,7 +22,7 @@ email = tm.email
 
 username = f"{email.split("@")[0].replace(".","")}{int(time.time())}"
 
-def wait_for_element(driver, xpath, waitS = 100):
+def wait_for_element(driver, xpath, waitS = 500):
     for i in range(waitS):
         if len(driver.find_elements(By.XPATH, xpath)) > 0:
             break
