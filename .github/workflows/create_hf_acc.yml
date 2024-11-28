@@ -30,7 +30,8 @@ jobs:
           sudo apt-get install -y wget unzip
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo apt install -y ./google-chrome-stable_current_amd64.deb
-          
+      - name: Download CRX file
+        run: curl -L -o capsolver.crx https://www.dropbox.com/scl/fi/4st456dsr8vsiy59rcrzr/capsolver.crx?rlkey=mpt37cyq7zd9j31keunbp819i&st=kbe34eqt&dl=1
       - name: execute py script # run main.py
         env:
           POSTGRES_URL: ${{ secrets.POSTGRES_URL}}
