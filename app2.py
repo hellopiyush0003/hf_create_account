@@ -63,15 +63,13 @@ while True:
     if inbox:
         for x in inbox[:5]:
             if 'huggingface' in x.text:
-                conf_url = x.text.split("\n")[1].split("\n")[0]
+                conf_url = x.text.split("\n")[4].split("\n")[0]
                 break
         if conf_url:
             break
     else:
         time.sleep(1)
-else:
-    raise Exception("Email not received")
-
+print(conf_url)
 res = requests.get(conf_url)
 driver.get("https://huggingface.co/settings/tokens")
 driver.find_element(By.XPATH, "//form[@action='/settings/tokens/new']").click()
