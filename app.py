@@ -58,7 +58,7 @@ driver.find_element(By.XPATH, "//button[@type='submit']").click()
 driver.find_element(By.XPATH, "//button[text()='Skip']").click()
 print("Waiting for email", email, username)
 conf_url = None
-While True:
+while True:
     inbox = Gmail.inbox(email)
     if inbox:
         for x in inbox[:5]:
