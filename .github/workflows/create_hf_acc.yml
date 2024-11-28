@@ -37,4 +37,4 @@ jobs:
           POSTGRES_URL: ${{ secrets.POSTGRES_URL}}
           PASSWORD: ${{ secrets.PASSWORD}}
           GHP_TOKEN: ${{ secrets.GHP_TOKEN}}
-        run: python -u app2.py
+        run: python -u app.py
