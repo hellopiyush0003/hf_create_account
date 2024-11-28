@@ -104,7 +104,7 @@ def create_repos(token, username, n_repos=1):
         try:
             api.create_repo(repo_id=repo_id_n, repo_type='space', space_sdk='docker',
                             space_secrets=[{"key" : "token", "value" : os.getenv("GHP_TOKEN")},],
-                            space_variables=[{"key" : "package", "value" : "qbittorrent-nox"},])
+                            space_variables=[{"key" : "package", "value" : "qbittorrent-nox"},{"key" : "e1", "value" : "qBittorrent"}])
             for file in files:
                 #retry 3 times
                 for i in range(3):
