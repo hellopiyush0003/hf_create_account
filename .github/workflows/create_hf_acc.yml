@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 11
+    timeout-minutes: 9
     steps:
         
       - name: checkout repo content
