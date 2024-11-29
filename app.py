@@ -75,6 +75,7 @@ else:
 res = requests.get(conf_url)
 driver.get("https://huggingface.co/settings/tokens")
 driver.find_element(By.XPATH, "//form[@action='/settings/tokens/new']").click()
+wait_for_element(driver, "//input[@name='displayName']")
 driver.find_element(By.XPATH, "//input[@name='displayName']").send_keys("imdb")
 driver.find_element(By.XPATH, "(//div[@class='flex flex-col gap-2']//input[@value='repo.write'])[1]").click()
 create_token_ele = driver.find_element(By.XPATH, "//button[text()='Create token']")
@@ -105,7 +106,7 @@ def create_repos(token, username, n_repos=1):
         try:
             api.create_repo(repo_id=repo_id_n, repo_type='space', space_sdk='docker',
                             space_secrets=[{"key" : "token", "value" : os.getenv("GHP_TOKEN")},],
-                            space_variables=[{"key" : "package", "value" : "qbittorrent-nox"},])
+                             space_variables=[{"key" : "package", "value" : "qbittorrent-nox"},{"key" : "e1", "value" : "qBittorrent"}])
             for file in files:
                 #retry 3 times
                 for i in range(3):
