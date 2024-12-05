@@ -57,6 +57,11 @@ wait_for_element(driver, "//button[@type='submit']")
 driver.find_element(By.XPATH, "//button[@type='submit']").click()
 driver.find_element(By.XPATH, "//button[text()='Skip']").click()
 print("Waiting for email", email, username)
+try:
+    wait_for_element(driver, "//button[@class='btn text-sm']",5)
+except Exception as e:
+    driver.quit()
+    raise Exception(f"Caught on security system ::: {e}")    
 conf_url = None
 while True:
     inbox = Gmail.inbox(email)
